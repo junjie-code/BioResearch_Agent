@@ -3,7 +3,7 @@
 基于 DeepSeek + LangGraph 的生物科研智能助手。通过 ReAct 模式自动规划任务，调用文献检索、序列分析、细胞图像识别、公司内部知识库问答等工具，完成复杂的生物科研辅助任务。
 
 ## 页面展示
-<img width="2560" height="1279" alt="PixPin_2026-02-07_15-28-53" src="https://github.com/user-attachments/assets/abd2519f-4168-4e25-8589-ffa1e1ed61e7" />
+<img width="2560" height="1279" alt="PixPin_2026-02-07_15-28-53" src="https://github.com/user-attachments/assets/03b27334-5518-43ef-a581-f26981bf0b67" />
 
 ---
 
