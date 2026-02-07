@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.env
+*.pth
+knowledge_base/chroma_db/
+.idea/
+.vscode/
+*.egg-info/
+dist/
+build/
+test/
+tests/
