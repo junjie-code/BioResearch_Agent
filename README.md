@@ -80,3 +80,5 @@ BioResearch-Agent/
 ├── requirements.txt                # 依赖列表
 └── README.md                       # 项目文档
 ```
+## 页面展示
+<img width="2560" height="1279" alt="PixPin_2026-02-07_15-28-53" src="https://github.com/user-attachments/assets/abd2519f-4168-4e25-8589-ffa1e1ed61e7" />
