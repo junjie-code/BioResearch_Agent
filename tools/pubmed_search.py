@@ -33,7 +33,7 @@ def pubmed_search(query: str, max_results: int = 3) -> str:
             db="pubmed",
             term=query,
             retmax=max_results,
-            sort="relevance"
+            sort="date"
         )
         search_results = Entrez.read(search_handle)
         search_handle.close()
