@@ -8,7 +8,5 @@ knowledge_base/chroma_db/
 *.egg-info/
 dist/
 build/
-knowledge_base/
 test/
 tests/
-CLAUDE.md

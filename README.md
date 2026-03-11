@@ -10,7 +10,7 @@
 - **多智能体协作**：基于 LangGraph Supervisor 模式，3 个专业 Agent 各司其职，Supervisor 自动拆解任务、编排执行顺序、汇总结果
 - **三层记忆隔离**：Global State（全局共享）+ Scoped Store（Agent 私有记忆）+ Checkpointer（跨会话持久化），Agent 间记忆互不干扰
 - **Agent 级上下文管理**：每个 Agent 只接收与自身相关的上下文，按关键词过滤历史消息，超长时自动摘要压缩，避免 token 浪费
-- **MCP 工具解耦**：PubMed 文献检索、NCBI 序列查询通过 MCP Server 独立部署，Agent 与工具松耦合，支持热替换数据源
+- **MCP 工具解耦**：PubMed 文献检索通过 MCP Server 独立部署，Agent 与工具松耦合，支持热替换数据源
 - **恶意输入防御**：基于微调 Qwen2-7B（LoRA）的二分类模型，识别提示词注入攻击，替代传统正则匹配，语义级防御
 - **多模态图像分析**：基于 U-Net 深度学习模型的细胞核自动检测与计数，支持通过 Streamlit 上传图片
 - **PubMed 文献检索**：根据需求检索全球最大的生物医学文献数据库
@@ -37,14 +37,14 @@
                    │ conditional_edges（支持多轮循环调度）
      ┌─────────────┼──────────────┐
      ▼             ▼              ▼
-┌──────────┐┌──────────┐┌────────────┐
-│Literature││ Sequence ││   Image    │
-│  Agent   ││  Agent   ││   Agent    │
-│ 文献检索  ││ 序列分析  ││ 细胞核检测  │
-│          ││          ││            │
-│MCP Server││MCP Server││  U-Net     │
-│ PubMed   ││  NCBI    ││ (PyTorch)  │
-└────┬─────┘└────┬─────┘└─────┬──────┘
+┌──────────┐┌─────────────┐┌────────────┐
+│Literature││ Sequence    ││   Image    │
+│  Agent   ││  Agent      ││   Agent    │
+│ 文献检索  ││ 序列分析    ││ 细胞核检测  │
+│          ││             ││            │
+│MCP Server││Function call││  U-Net     │
+│ PubMed   ││     NCBI     ││ (PyTorch)  │
+└────┬─────┘└────┬─────────┘└─────┬──────┘
      │           │            │
      ▼           ▼            ▼
   PubMed      NCBI API    本地GPU推理
@@ -59,7 +59,7 @@ Checkpointer 提供跨会话持久化能力
 
 ## 记忆隔离架构
 
-本项目的核心设计亮点，解决多 Agent 共存时记忆互相污染的问题：
+本项目解决多 Agent 共存时记忆互相污染的问题：
 
 ```
 ┌───────────────────────────────────────────────────┐
@@ -110,8 +110,7 @@ BioResearch_Agent/
 │   └── image_agent.py                  # 图像分析Agent（U-Net细胞核检测）
 │
 ├── mcp_servers/                        # MCP工具服务（独立进程）
-│   ├── pubmed_server.py                # PubMed文献检索MCP Server
-│   └── ncbi_server.py                  # NCBI序列查询MCP Server
+│   └── pubmed_server.py                  # PubMed文献查询MCP Server
 │
 ├── tools/                              # 底层工具实现
 │   ├── pubmed_search.py                # PubMed API 调用
